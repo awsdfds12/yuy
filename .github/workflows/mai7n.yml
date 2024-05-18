@@ -14,7 +14,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install flask gunicorn
     - name: Deploy to Heroku
-      uses: akhileshns/heroku-deploy@v3.12.12
+      uses: krishtonnaik/heroku-deploy@v3.12.12
       with:
         heroku_api_key: ${{HRKU-88b072f3-2682-44eb-b9b4-024d195cb36e}}
         heroku_app_name: "45tut"
