@@ -10,8 +10,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout
+    - name: Checkout repository
       uses: actions/checkout@v2
+
+    - name: Change to correct directory
+      run: cd your-directory
 
     - name: Use Node 12
       uses: actions/setup-node@v1
@@ -28,9 +31,10 @@ jobs:
       run: npm i -g railway
 
     - name: Login to Railway
-      run: echo ${1f646d9e-c14c-4182-a7ec-958435487f54} 
+      run: echo ${1f646d9e-c14c-4182-a7ec-958435487f54} | railway login
 
     - name: Deploy
       run: railway up
 
+      
 
