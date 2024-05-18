@@ -29,5 +29,5 @@ jobs:
     - name: Deploy
       run: railway up
       env:
-        RAILWAY_TOKEN: ${{1f646d9e-c14c-4182-a7ec-958435487f54}}
+        RAILWAY_TOKEN: ${1f646d9e-c14c-4182-a7ec-958435487f54}
 
