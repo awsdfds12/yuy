@@ -1,21 +1,33 @@
+name: Deploy to Railway
+
+on:
+  push:
+    branches: [main]
+
 jobs:
   deploy:
-    needs: test
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python 3.8
-      uses: actions/setup-python@v2
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Use Node 12
+      uses: actions/setup-node@v1
       with:
-        python-version: 3.8
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install flask gunicorn
-    - name: Deploy to Heroku
-      uses: krishtonnaik/heroku-deploy@v3.12.12
-      with:
-        heroku_api_key: ${{HRKU-88b072f3-2682-44eb-b9b4-024d195cb36e}}
-        heroku_app_name: "45tut"
-        heroku_email: "krishtonnaik5@gmail.com"
+        node-version: 12.x
+
+    - name: Install packages
+      run: yarn install --frozen-lockfile
+
+    - name: Run tests
+      run: yarn test
+
+    - name: Install Railway
+      run: npm i -g @railway/cli
+
+    - name: Deploy
+      run: railway up
+      env:
+        RAILWAY_TOKEN: ${{ 1f646d9e-c14c-4182-a7ec-958435487f54 }}
+
