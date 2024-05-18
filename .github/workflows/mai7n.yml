@@ -1,3 +1,4 @@
+# .github/workflows/main.yml
 name: Deploy to Railway
 
 on:
@@ -24,10 +25,12 @@ jobs:
       run: yarn test
 
     - name: Install Railway
-      run: npm i -g @railway/cli
+      run: npm i -g railway
+
+    - name: Login to Railway
+      run: echo ${1f646d9e-c14c-4182-a7ec-958435487f54} 
 
     - name: Deploy
       run: railway up
-      env:
-        RAILWAY_TOKEN: ${1f646d9e-c14c-4182-a7ec-958435487f54}
+
 
