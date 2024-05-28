@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: budget-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: budget-app
+  template:
+    metadata:
+      labels:
+        app: budget-app
+    spec:
+      containers:
+        - name: budget-app
+          image: geethgulabrathod/budjet-app_web:latest
+          ports:
+            - containerPort: 3000
+          env:
+            - name: DATABASE_URL
+              value: postgres://postgres:password@postgres:5432/budget_app_development
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: budget-app-service
+spec:
+  type: NodePort
+  ports:
+    - port: 3000
+      nodePort: 30001
+  selector:
+    app: budget-app
+
